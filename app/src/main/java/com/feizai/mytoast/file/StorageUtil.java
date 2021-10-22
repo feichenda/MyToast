@@ -9,6 +9,7 @@ public class StorageUtil {
     private static final long KB = 1024;
     private static final long MB = KB * 1024;
     private static final long GB = MB * 1024;
+    private static final long TB = GB * 1024;
 
     private static final String INTERNAL_STORAGE_PATH = "/storage/emulated/0";
 
@@ -46,9 +47,12 @@ public class StorageUtil {
         } else if (size > MB && size <= GB) {
             resultSize = size / MB;
             fileSizeString = String.valueOf(resultSize) + "MB";
-        } else {
+        } else if (size > GB && size <= TB) {
             resultSize = size * 1.0f / GB;
             fileSizeString = decimalFormat.format(resultSize) + "G";
+        } else {
+            resultSize = size * 1.0f / TB;
+            fileSizeString = decimalFormat.format(resultSize) + "T";
         }
         return fileSizeString;
     }
